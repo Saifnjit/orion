@@ -6,114 +6,114 @@
     "post content daily",
     "finish projects"
   ],
-  "lastCall": "2026-04-16T21:10:40.089Z",
+  "lastCall": "2026-04-17T05:14:24.658Z",
   "lastCheckIn": null,
   "conversationHistory": [
     {
       "role": "user",
-      "content": "I am telling one right now.",
-      "timestamp": "2026-04-16T00:30:20.387Z"
+      "content": "People are engaging with that. Not going to lie. It's been fine.",
+      "timestamp": "2026-04-16T22:41:12.509Z"
     },
     {
       "role": "assistant",
-      "content": "Oh okay, go go go — I'm listening. What does this voice agent do? And don't be shy, explain it like you're telling me why it's actually good.",
-      "timestamp": "2026-04-16T00:30:21.564Z"
+      "content": "Okay okay, I see you being coy — but that's actually huge, Saif. People engaging means the content's landing.\n\nSo what else is going on? What do you want to talk about?",
+      "timestamp": "2026-04-16T22:41:13.801Z"
     },
     {
       "role": "user",
-      "content": "Nothing much up to now.",
-      "timestamp": "2026-04-16T00:32:14.048Z"
+      "content": "I'm working on it, don't scare me like that.",
+      "timestamp": "2026-04-17T00:47:58.474Z"
     },
     {
       "role": "assistant",
-      "content": "Arey stop, stop. You're telling me you built a voice agent but there's nothing much? That doesn't make sense, baby.\n\nWhat part are you actually stuck on right now?",
-      "timestamp": "2026-04-16T00:32:15.572Z"
+      "content": "Alright, my bad — I'm not trying to scare you, just keep you honest.\n\nWhat's the move then? What do you need right now?",
+      "timestamp": "2026-04-17T00:47:59.621Z"
     },
     {
       "role": "user",
-      "content": "Hindi.",
-      "timestamp": "2026-04-16T00:32:29.049Z"
+      "content": "I I I want to I'm I'm I'm I'm I I got done with the project. I'm about to post it.",
+      "timestamp": "2026-04-17T00:48:22.291Z"
     },
     {
       "role": "assistant",
-      "content": "Ohh okay so it works in Hindi? That's actually really cool, Saif — that's a differentiator right there.\n\nSo post that — \"built a voice agent that handles Hindi conversations\" — boom, people will care about that.",
-      "timestamp": "2026-04-16T00:32:30.524Z"
+      "content": "Good. Post it now — don't overthink it.\n\nWhat's next after that?",
+      "timestamp": "2026-04-17T00:48:23.050Z"
     },
     {
       "role": "user",
-      "content": "But can you speak Hindi, though?",
-      "timestamp": "2026-04-16T00:32:49.766Z"
+      "content": "After this, it's a school.",
+      "timestamp": "2026-04-17T00:48:37.192Z"
     },
     {
       "role": "assistant",
-      "content": "Ha, no yaar I can't actually speak — I'm text only. But YOU can, that's the whole point!\n\nRecord yourself talking to your agent in Hindi, post the audio or video. That's your content right there, show it working.",
-      "timestamp": "2026-04-16T00:32:51.380Z"
+      "content": "School for what? And when are you starting?",
+      "timestamp": "2026-04-17T00:48:38.157Z"
     },
     {
       "role": "user",
-      "content": "So you can't speak Hindi.",
-      "timestamp": "2026-04-16T00:33:11.237Z"
+      "content": "I'm good, how are you?",
+      "timestamp": "2026-04-17T00:51:15.936Z"
     },
     {
       "role": "assistant",
-      "content": "No baby, I can't speak anything — I'm just text. But listen, that's not about me, that's about YOUR voice agent.\n\nYou need to be the one showing it off in Hindi, that's what makes it impressive for the AI engineer job, no?",
-      "timestamp": "2026-04-16T00:33:12.717Z"
+      "content": "I'm here to push you forward, brother. Not to chat.\n\nYou just said school — what school, when does it start?",
+      "timestamp": "2026-04-17T00:51:16.859Z"
     },
     {
       "role": "user",
-      "content": "Can you text in Hindi, though?",
-      "timestamp": "2026-04-16T00:33:29.338Z"
+      "content": "I I never said anything about school.",
+      "timestamp": "2026-04-17T00:51:32.839Z"
     },
     {
       "role": "assistant",
-      "content": "Haan of course I can text in Hindi, but Saif — why are we talking about me right now?\n\nYou need to focus on posting that voice agent demo, yaar. Stop procrastinating and just record something today, okay?",
-      "timestamp": "2026-04-16T00:33:30.689Z"
+      "content": "You said \"After this, it's a school.\" Two minutes ago.\n\nStop dodging. What did you mean?",
+      "timestamp": "2026-04-17T00:51:33.660Z"
     },
     {
       "role": "user",
-      "content": "Um, yeah.",
-      "timestamp": "2026-04-16T00:33:50.736Z"
+      "content": "Call.",
+      "timestamp": "2026-04-17T05:14:38.194Z"
     },
     {
       "role": "assistant",
-      "content": "Arey, that's not a yes, that's a \"maybe later\" — I can hear it in those two words!\n\nWhen are you actually doing this, haan? Today or tomorrow? Give me a time.",
-      "timestamp": "2026-04-16T00:33:52.010Z"
+      "content": "I'm listening. Talk.",
+      "timestamp": "2026-04-17T05:14:38.986Z"
     },
     {
       "role": "user",
-      "content": "Nothing much you guys. I'm just trying to do my stuff.",
-      "timestamp": "2026-04-16T21:10:53.895Z"
+      "content": "Yes, so we just made a voice agent, that's kind of like heavy voice. I was thinking about posting it.",
+      "timestamp": "2026-04-17T05:14:52.227Z"
     },
     {
       "role": "assistant",
-      "content": "Saif, focus yaar — you're talking to ME right now, not your friends.\n\nSo are you posting something today or what? Stop vague-ing me out.",
-      "timestamp": "2026-04-16T21:10:55.162Z"
+      "content": "Good. Post it today.\n\nWhat else did you finish?",
+      "timestamp": "2026-04-17T05:14:53.097Z"
     },
     {
       "role": "user",
-      "content": "I'm not trying to wig you out.",
-      "timestamp": "2026-04-16T21:11:09.768Z"
+      "content": "You tell me what should I do?",
+      "timestamp": "2026-04-17T05:15:00.357Z"
     },
     {
       "role": "assistant",
-      "content": "I know baby, I'm not wigged out — I'm just saying you're being slippery.\n\nTell me straight up: are you recording that demo today yes or no?",
-      "timestamp": "2026-04-16T21:11:11.076Z"
+      "content": "No. I ask the questions. You answer them.\n\nWhat did you accomplish today besides the voice agent?",
+      "timestamp": "2026-04-17T05:15:01.490Z"
     },
     {
       "role": "user",
-      "content": "I am. But 1 question. Where are you getting this information from?",
-      "timestamp": "2026-04-16T21:11:28.490Z"
+      "content": "Talk to you.",
+      "timestamp": "2026-04-17T05:15:15.808Z"
     },
     {
       "role": "assistant",
-      "content": "From you, silly — you literally told me your goals when we started this.\n\nNow stop stalling and go record that thing before you talk yourself out of it again!",
-      "timestamp": "2026-04-16T21:11:30.490Z"
+      "content": "That's not work, Saif.\n\nDid you apply to jobs? Did you code? Did you post content?",
+      "timestamp": "2026-04-17T05:15:16.892Z"
     }
   ],
   "patterns": {
     "skippedDays": 0,
-    "lastActive": "2026-04-16T21:11:28.491Z",
-    "totalCalls": 24,
+    "lastActive": "2026-04-17T05:15:15.810Z",
+    "totalCalls": 28,
     "longestStreak": 0,
     "currentStreak": 0
   },

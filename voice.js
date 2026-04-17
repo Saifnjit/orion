@@ -17,7 +17,7 @@ async function generateAudio(text, personality = 'drill_sergeant') {
 }
 
 async function generateElevenLabs(text) {
-  const voiceId = 'Gh6Qzb6YtDZSmomn90ZT'; // Saritha custom voice
+  const voiceId = 'TagUgIrSxZiaLUIH4Ksk'; // Kratos voice
   const filename = `speech_${Date.now()}.mp3`;
   const filepath = path.join(AUDIO_DIR, filename);
 
