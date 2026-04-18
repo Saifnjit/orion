@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orion</title>
+    <link rel="stylesheet" crossorigin href="./assets/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <style>
+      html, body { margin:0; padding:0; overflow:hidden; height:100%; background:#000; }
+
+      /* Hide Replit's fixed header on all non-hero slides */
+      body.fp-nohero #root > * > [style*="position: fixed"],
+      body.fp-nohero #root > * > [style*="position:fixed"],
+      body.fp-nohero #root nav,
+      body.fp-nohero #root header {
+        display: none !important;
+      }
+
+      /* Each slide — applied via JS */
+      .fp-slide {
+        position: fixed !important;
+        inset: 0 !important;
+        height: 100vh !important;
+        width: 100vw !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: translateY(40px) !important;
+        transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                    transform 0.65s cubic-bezier(0.16,1,0.3,1) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding: 0 !important;
+        z-index: 1 !important;
+      }
+      .fp-slide.fp-active {
+        opacity: 1 !important;
+        pointer-events: all !important;
+        transform: translateY(0) !important;
+        z-index: 10000 !important;
+      }
+      .fp-slide.fp-exit {
+        opacity: 0 !important;
+        transform: translateY(-40px) !important;
+        z-index: 1 !important;
+      }
+
+      /* Nav dots + arrows */
+      #fp-nav {
+        position: fixed; right: 22px; top: 50%;
+        transform: translateY(-50%);
+        z-index: 99999;
+        display: flex; flex-direction: column; align-items: center; gap: 10px;
+      }
+      .fp-arrow {
+        width: 32px; height: 32px; border-radius: 50%;
+        border: 1px solid rgba(167,139,250,0.35);
+        background: rgba(8,4,18,0.7);
+        color: #a78bfa; font-size: 13px;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; transition: all 0.2s; backdrop-filter: blur(8px);
+      }
+      .fp-arrow:hover { border-color: #7c3aed; color: #f5f0ff; box-shadow: 0 0 10px rgba(124,58,237,0.4); }
+      .fp-dot {
+        width: 9px; height: 9px; border-radius: 50%;
+        border: 1px solid rgba(167,139,250,0.5);
+        background: transparent; cursor: pointer;
+        transition: all 0.25s;
+      }
+      .fp-dot.active { background: #7c3aed; border-color: #7c3aed; box-shadow: 0 0 8px #7c3aed; transform: scale(1.2); }
+      .fp-dot:hover { border-color: #a78bfa; }
+
+      /* ── DASHBOARD SLIDE ── */
+      #orion-dash-section {
+        background: #080412;
+        font-family: 'Inter', sans-serif;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      #orion-dash-section::before {
+        content: '';
+        position: absolute; inset: 0;
+        background-image: url('./assets/img2.jpeg');
+        background-size: cover; background-position: center;
+        opacity: 0.15; z-index: 0;
+      }
+      .dash-bg-grad {
+        position: absolute; inset: 0; pointer-events: none; z-index: 0;
+        background:
+          radial-gradient(ellipse 70% 50% at 50% 0%, rgba(124,58,237,0.22) 0%, transparent 65%),
+          linear-gradient(to bottom, rgba(8,4,18,0.5), rgba(8,4,18,0.88));
+      }
+      .od-header {
+        position: relative; z-index: 10; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 18px 32px;
+        border-bottom: 1px solid rgba(124,58,237,0.15);
+        background: rgba(8,4,18,0.6); backdrop-filter: blur(14px);
+      }
+      .od-logo {
+        display: flex; align-items: center; gap: 10px;
+        font-family: 'Cinzel', serif; font-size: 14px;
+        letter-spacing: 0.3em; color: #f5f0ff;
+      }
+      .od-logo-dot {
+        width: 7px; height: 7px; background: #7c3aed; border-radius: 50%;
+        box-shadow: 0 0 10px #7c3aed; animation: od-pulse 2s infinite;
+      }
+      @keyframes od-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+      .od-tabs {
+        display: flex; gap: 3px;
+        background: rgba(124,58,237,0.08);
+        border: 1px solid rgba(124,58,237,0.18);
+        border-radius: 10px; padding: 4px;
+      }
+      .od-tab {
+        padding: 7px 16px; border: none;
+        background: transparent; color: rgba(167,139,250,0.55);
+        font-size: 11px; letter-spacing: 0.14em;
+        cursor: pointer; border-radius: 7px;
+        transition: all 0.2s; font-family: 'Inter', sans-serif;
+      }
+      .od-tab:hover { color: #a78bfa; }
+      .od-tab.active { background: rgba(124,58,237,0.22); color: #f5f0ff; }
+      .od-status {
+        display: flex; align-items: center; gap: 7px;
+        font-size: 11px; letter-spacing: 0.12em; color: rgba(167,139,250,0.6);
+      }
+      .od-pip {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #22c55e; box-shadow: 0 0 8px #22c55e;
+        animation: od-pulse 2s infinite;
+      }
+      .od-body {
+        position: relative; z-index: 5; flex: 1;
+        display: grid; grid-template-columns: 1fr 270px;
+        gap: 16px; padding: 18px 32px; min-height: 0;
+      }
+      .od-panel {
+        background: rgba(8,4,18,0.55);
+        border: 1px solid rgba(124,58,237,0.13);
+        border-radius: 14px; padding: 18px;
+        overflow-y: auto; backdrop-filter: blur(10px);
+      }
+      .od-panel::-webkit-scrollbar { width: 3px; }
+      .od-panel::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.3); border-radius: 2px; }
+      .od-panel-title {
+        font-size: 9px; letter-spacing: 0.28em; color: #7c3aed;
+        font-weight: 700; margin-bottom: 16px;
+        display: flex; align-items: center; gap: 8px;
+      }
+      .od-panel-title::after { content:''; flex:1; height:1px; background:rgba(124,58,237,0.18); }
+      .od-pane { display: none; }
+      .od-pane.active { display: block; animation: od-up 0.3s ease forwards; }
+      @keyframes od-up { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+      .od-dec { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid rgba(124,58,237,0.07); }
+      .od-dec-body { flex:1; }
+      .od-dec-action { font-size:12px; font-weight:600; display:block; margin-bottom:2px; }
+      .od-dec-reason { font-size:11px; color:rgba(167,139,250,0.55); }
+      .od-dec-topic { font-size:11px; color:rgba(167,139,250,0.4); font-style:italic; display:block; margin-top:2px; }
+      .od-dec-time { font-size:10px; color:rgba(167,139,250,0.35); white-space:nowrap; }
+      .od-chat { display:flex; flex-direction:column; gap:3px; margin-bottom:12px; }
+      .od-chat.assistant { align-items:flex-start; }
+      .od-chat.user { align-items:flex-end; }
+      .od-chat-label { font-size:10px; color:rgba(167,139,250,0.4); margin:0 8px; }
+      .od-chat-bubble { max-width:82%; padding:9px 13px; border-radius:11px; font-size:12px; line-height:1.55; }
+      .od-chat.assistant .od-chat-bubble { background:rgba(124,58,237,0.15); border:1px solid rgba(124,58,237,0.2); color:#e9d5ff; border-top-left-radius:3px; }
+      .od-chat.user .od-chat-bubble { background:rgba(124,58,237,0.07); border:1px solid rgba(124,58,237,0.1); color:rgba(245,240,255,0.65); border-top-right-radius:3px; }
+      .od-chat-time { font-size:10px; color:rgba(167,139,250,0.28); margin:0 8px; }
+      .od-cmd-section { margin-bottom:22px; }
+      .od-cmd-label { font-size:9px; letter-spacing:0.22em; color:rgba(167,139,250,0.45); margin-bottom:9px; }
+      .od-goal-row { display:flex; align-items:center; gap:9px; padding:8px 0; border-bottom:1px solid rgba(124,58,237,0.07); font-size:12px; color:#e9d5ff; }
+      .od-goal-dot { color:#7c3aed; font-size:9px; }
+      .od-input { width:100%; background:rgba(124,58,237,0.07); border:1px solid rgba(124,58,237,0.18); border-radius:8px; padding:8px 12px; color:#f5f0ff; font-size:12px; font-family:'Inter',sans-serif; outline:none; box-sizing:border-box; margin-bottom:10px; transition:border-color 0.2s; }
+      .od-input:focus { border-color:rgba(124,58,237,0.45); }
+      .od-input::placeholder { color:rgba(167,139,250,0.28); }
+      .od-trig-row { display:flex; gap:9px; }
+      .od-trig-btn { flex:1; padding:10px; border:1px solid rgba(124,58,237,0.28); border-radius:9px; background:rgba(124,58,237,0.09); color:#a78bfa; font-size:11px; cursor:pointer; transition:all 0.2s; font-family:'Inter',sans-serif; letter-spacing:0.06em; }
+      .od-trig-btn:hover { background:rgba(124,58,237,0.2); color:#f5f0ff; border-color:rgba(124,58,237,0.45); }
+      .od-trig-btn:disabled { opacity:0.35; cursor:not-allowed; }
+      .od-feedback { font-size:12px; color:#a78bfa; margin-top:8px; animation:od-up 0.3s ease; }
+      .od-srow { display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid rgba(124,58,237,0.07); font-size:11px; }
+      .od-splus { color:#7c3aed; font-size:9px; }
+      .od-slabel { color:rgba(167,139,250,0.45); flex:1; }
+      .od-sval { color:#f5f0ff; font-weight:500; font-size:12px; }
+      .od-waveform { display:flex; align-items:center; gap:2.5px; margin:14px 0; height:26px; }
+      .od-wbar { flex:1; background:linear-gradient(to top,#7c3aed,#a78bfa); border-radius:2px; opacity:0.6; animation:od-wave 1.4s ease-in-out infinite alternate; }
+      @keyframes od-wave { from{transform:scaleY(0.25)} to{transform:scaleY(1)} }
+      .od-sid { font-size:9px; color:rgba(124,58,237,0.35); letter-spacing:0.15em; margin-top:12px; font-family:'Courier New',monospace; }
+      .od-empty { color:rgba(167,139,250,0.28); font-size:12px; text-align:center; padding:32px 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Dashboard slide — lives outside #root so React never touches it -->
+    <section id="orion-dash-section" class="fp-slide">
+      <div class="dash-bg-grad"></div>
+      <header class="od-header">
+        <div class="od-logo"><div class="od-logo-dot"></div>ORION</div>
+        <div class="od-tabs">
+          <button class="od-tab active" data-tab="mind">MIND</button>
+          <button class="od-tab" data-tab="calls">CALLS</button>
+          <button class="od-tab" data-tab="texts">TEXTS</button>
+          <button class="od-tab" data-tab="command">COMMAND</button>
+        </div>
+        <div class="od-status"><div class="od-pip"></div>ACTIVE</div>
+      </header>
+      <div class="od-body">
+        <div class="od-panel">
+          <div class="od-pane active" id="od-mind">
+            <div class="od-panel-title">+ MIND · DECISION LOG</div>
+            <div id="od-mind-list"><p class="od-empty">Waiting for Orion to act...</p></div>
+          </div>
+          <div class="od-pane" id="od-calls">
+            <div class="od-panel-title">+ CALLS · CONVERSATION</div>
+            <div id="od-calls-list"><p class="od-empty">No call history yet.</p></div>
+          </div>
+          <div class="od-pane" id="od-texts">
+            <div class="od-panel-title">+ TEXTS · SENT LOG</div>
+            <div id="od-texts-list"><p class="od-empty">No texts sent yet.</p></div>
+          </div>
+          <div class="od-pane" id="od-command">
+            <div class="od-panel-title">+ COMMAND · CONTROL</div>
+            <div class="od-cmd-section">
+              <div class="od-cmd-label">ACTIVE GOALS</div>
+              <div id="od-goals-list"></div>
+            </div>
+            <div class="od-cmd-section">
+              <div class="od-cmd-label">TRIGGER ORION</div>
+              <input class="od-input" id="od-topic" placeholder="Topic (optional)"/>
+              <div class="od-trig-row">
+                <button class="od-trig-btn" id="od-btn-call">📞 Call Me Now</button>
+                <button class="od-trig-btn" id="od-btn-text">💬 Text Me Now</button>
+              </div>
+              <div id="od-feedback"></div>
+            </div>
+          </div>
+        </div>
+        <div class="od-panel">
+          <div class="od-panel-title">+ ACTIVE SESSION</div>
+          <div id="od-session"></div>
+          <div class="od-waveform" id="od-waveform"></div>
+          <div class="od-panel-title" style="margin-top:4px">+ PROCESSING</div>
+          <div class="od-srow"><span class="od-splus">+</span><span class="od-slabel">Memory extraction</span></div>
+          <div class="od-srow"><span class="od-splus">+</span><span class="od-slabel">Cognitive analysis</span></div>
+          <div class="od-sid" id="od-sid">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nav dots -->
+    <div id="fp-nav"></div>
+
+    <script type="module" src="./assets/index.js"></script>
+    <script>
+      const BACKEND = 'https://fredericka-unrepudiative-adolph.ngrok-free.dev';
+      let slides = [];
+      let current = 0;
+      let animating = false;
+
+      function timeAgo(d) {
+        if (!d) return 'Never';
+        const s = (Date.now() - new Date(d)) / 1000;
+        if (s < 60) return 'Just now';
+        if (s < 3600) return `${Math.floor(s/60)}m ago`;
+        if (s < 86400) return `${Math.floor(s/3600)}h ago`;
+        return `${Math.floor(s/86400)}d ago`;
+      }
+      function fmt(d) {
+        if (!d) return '';
+        return new Date(d).toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+      }
+
+      /* ── Fullpage ── */
+      function goTo(idx, dir) {
+        if (animating || idx === current || idx < 0 || idx >= slides.length) return;
+        animating = true;
+        const prev = slides[current];
+        const next = slides[idx];
+        prev.classList.add('fp-exit');
+        prev.classList.remove('fp-active');
+        // prep entry position
+        next.style.setProperty('transform', dir > 0 ? 'translateY(40px)' : 'translateY(-40px)', 'important');
+        next.style.setProperty('opacity', '0', 'important');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          next.style.removeProperty('transform');
+          next.style.removeProperty('opacity');
+          next.classList.add('fp-active');
+          current = idx;
+          updateDots();
+          setTimeout(() => { prev.classList.remove('fp-exit'); animating = false; }, 700);
+          // hide Replit's fixed nav on all slides except hero (index 0)
+          document.body.classList.toggle('fp-nohero', current !== 0);
+          if (next.id === 'orion-dash-section') fetchDashData();
+        }));
+      }
+
+      function buildNav() {
+        const nav = document.getElementById('fp-nav');
+        nav.innerHTML =
+          `<div class="fp-arrow" id="fp-up">▲</div>` +
+          slides.map((s, i) =>
+            `<div class="fp-dot${i===0?' active':''}" data-i="${i}" title="Page ${i+1}"></div>`
+          ).join('') +
+          `<div class="fp-arrow" id="fp-down">▼</div>`;
+        nav.querySelectorAll('.fp-dot').forEach(d =>
+          d.addEventListener('click', () => goTo(+d.dataset.i, +d.dataset.i > current ? 1 : -1))
+        );
+        document.getElementById('fp-up').addEventListener('click', () => goTo(current-1, -1));
+        document.getElementById('fp-down').addEventListener('click', () => goTo(current+1, 1));
+      }
+
+      function updateDots() {
+        document.querySelectorAll('.fp-dot').forEach((d,i) => d.classList.toggle('active', i === current));
+      }
+
+      // Scroll wheel navigates pages only when the slide is scrolled to top/bottom
+      let wheelLock = false;
+      window.addEventListener('wheel', e => {
+        const slide = slides[current];
+        if (!slide) return;
+        const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 4;
+        const atTop = slide.scrollTop <= 4;
+        if ((e.deltaY > 0 && atBottom) || (e.deltaY < 0 && atTop)) {
+          e.preventDefault();
+          if (wheelLock) return;
+          wheelLock = true;
+          goTo(current + (e.deltaY > 0 ? 1 : -1), e.deltaY > 0 ? 1 : -1);
+          setTimeout(() => { wheelLock = false; }, 900);
+        }
+      }, { passive: false });
+
+      window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') goTo(current+1, 1);
+        if (e.key === 'ArrowUp'   || e.key === 'PageUp')   goTo(current-1, -1);
+      });
+
+      let ty = 0;
+      window.addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
+      window.addEventListener('touchend',   e => {
+        const dy = ty - e.changedTouches[0].clientY;
+        if (Math.abs(dy) > 50) goTo(current + (dy > 0 ? 1 : -1), dy > 0 ? 1 : -1);
+      });
+
+      /* ── Bootstrap: wait for React sections, then add fp-slide class ── */
+      let booted = false;
+      const boot = new MutationObserver(() => {
+        if (booted) return;
+        const sections = document.querySelectorAll('#root section');
+        if (sections.length < 2) return;
+        booted = true;
+        boot.disconnect();
+
+        // Build slide order: hero, dashboard, then rest of React sections
+        const reactSections = Array.from(sections);
+        const dash = document.getElementById('orion-dash-section');
+
+        slides = [
+          reactSections[0],          // Page 1: Hero
+          dash,                       // Page 2: Dashboard
+          ...reactSections.slice(1),  // Pages 3+: Rest of Replit pages
+        ];
+
+        slides.forEach((s, i) => {
+          s.classList.add('fp-slide');
+          if (i === 0) s.classList.add('fp-active');
+        });
+
+        buildNav();
+        hookCTA();
+        fetchDashData();
+      });
+      boot.observe(document.body, { childList: true, subtree: true });
+
+      /* ── Hook CTA ── */
+      const ctaObs = new MutationObserver(hookCTA);
+      ctaObs.observe(document.body, { childList: true, subtree: true });
+
+      function hookCTA() {
+        document.querySelectorAll('button, a').forEach(el => {
+          if (el.textContent.trim() === 'Request Access' && !el._odh) {
+            el._odh = true;
+            const clone = el.cloneNode(true);
+            clone._odh = true;
+            clone.addEventListener('click', e => {
+              e.preventDefault(); e.stopImmediatePropagation();
+              const i = slides.findIndex(s => s.id === 'orion-dash-section');
+              goTo(i, i > current ? 1 : -1);
+            }, true);
+            el.parentNode?.replaceChild(clone, el);
+          }
+        });
+      }
+
+      /* ── Dashboard tabs ── */
+      document.querySelectorAll('.od-tab').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          document.querySelectorAll('.od-tab').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.od-pane').forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          document.getElementById('od-' + btn.dataset.tab).classList.add('active');
+        });
+      });
+
+      document.getElementById('od-btn-call').addEventListener('click', async e => {
+        e.stopPropagation();
+        const btn = e.currentTarget;
+        const topic = document.getElementById('od-topic').value;
+        btn.disabled = true; btn.textContent = 'Calling...';
+        try {
+          const r = await fetch(`${BACKEND}/api/trigger/call`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({topic:topic||'check in'}) }).then(r=>r.json());
+          document.getElementById('od-feedback').innerHTML = `<div class="od-feedback">${r.success?'📞 Calling you now...':'Error: '+r.error}</div>`;
+        } catch { document.getElementById('od-feedback').innerHTML = '<div class="od-feedback">Connection failed</div>'; }
+        btn.disabled = false; btn.textContent = '📞 Call Me Now';
+        fetchDashData();
+      });
+
+      document.getElementById('od-btn-text').addEventListener('click', async e => {
+        e.stopPropagation();
+        const btn = e.currentTarget;
+        const topic = document.getElementById('od-topic').value;
+        btn.disabled = true; btn.textContent = 'Sending...';
+        try {
+          const r = await fetch(`${BACKEND}/api/trigger/text`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({topic:topic||'check in'}) }).then(r=>r.json());
+          document.getElementById('od-feedback').innerHTML = `<div class="od-feedback">${r.success?'💬 Text sent!':'Error: '+r.error}</div>`;
+        } catch { document.getElementById('od-feedback').innerHTML = '<div class="od-feedback">Connection failed</div>'; }
+        btn.disabled = false; btn.textContent = '💬 Text Me Now';
+        fetchDashData();
+      });
+
+      /* ── Data ── */
+      async function fetchDashData() {
+        try {
+          const [s, h] = await Promise.all([
+            fetch(`${BACKEND}/api/status`).then(r=>r.json()),
+            fetch(`${BACKEND}/api/history`).then(r=>r.json()),
+          ]);
+          renderMind(s.decisions||[]);
+          renderCalls(h);
+          renderTexts(s.decisions||[]);
+          renderGoals(s.goals||[]);
+          renderSession(s);
+        } catch {}
+      }
+
+      function renderMind(d) {
+        const el = document.getElementById('od-mind-list'); if(!el) return;
+        if(!d.length){el.innerHTML='<p class="od-empty">Waiting for Orion to act...</p>';return;}
+        const c={call:'#a78bfa',text:'#c084fc',none:'#4b3a6e'}, ic={call:'📞',text:'💬',none:'◌'};
+        el.innerHTML=d.slice(0,20).map((x,i)=>`
+          <div class="od-dec" style="animation-delay:${i*.05}s">
+            <span style="font-size:14px;margin-top:2px">${ic[x.action]||'◌'}</span>
+            <div class="od-dec-body">
+              <span class="od-dec-action" style="color:${c[x.action]||'#4b3a6e'}">${x.action==='call'?'Called':x.action==='text'?'Texted':'Waited'}</span>
+              <span class="od-dec-reason">${x.reason||''}</span>
+              ${x.topic?`<span class="od-dec-topic">"${x.topic}"</span>`:''}
+            </div>
+            <span class="od-dec-time">${fmt(x.timestamp)}</span>
+          </div>`).join('');
+      }
+
+      function renderCalls(h) {
+        const el = document.getElementById('od-calls-list'); if(!el) return;
+        if(!h.length){el.innerHTML='<p class="od-empty">No call history yet.</p>';return;}
+        el.innerHTML=h.map((m,i)=>`
+          <div class="od-chat ${m.role}" style="animation-delay:${i*.04}s">
+            <span class="od-chat-label">${m.role==='assistant'?'Orion':'You'}</span>
+            <div class="od-chat-bubble">${m.content}</div>
+            <span class="od-chat-time">${timeAgo(m.timestamp)}</span>
+          </div>`).join('');
+        el.scrollTop=el.scrollHeight;
+      }
+
+      function renderTexts(d) {
+        const el = document.getElementById('od-texts-list'); if(!el) return;
+        const t=d.filter(x=>x.action==='text');
+        if(!t.length){el.innerHTML='<p class="od-empty">No texts sent yet.</p>';return;}
+        el.innerHTML=t.map((x,i)=>`
+          <div class="od-dec" style="animation-delay:${i*.05}s">
+            <span style="font-size:14px">💬</span>
+            <div class="od-dec-body">
+              <span class="od-dec-action" style="color:#c084fc">${x.topic||'Check in'}</span>
+              <span class="od-dec-reason">${x.reason||''}</span>
+            </div>
+            <span class="od-dec-time">${fmt(x.timestamp)}</span>
+          </div>`).join('');
+      }
+
+      function renderGoals(g) {
+        const el = document.getElementById('od-goals-list'); if(!el) return;
+        el.innerHTML=g.map(x=>`<div class="od-goal-row"><span class="od-goal-dot">◆</span>${x}</div>`).join('')
+          ||'<p class="od-empty" style="padding:10px 0">No goals set.</p>';
+      }
+
+      function renderSession(s) {
+        const el=document.getElementById('od-session'); if(el) el.innerHTML=`
+          <div class="od-srow"><span class="od-splus">+</span><span class="od-slabel">Client</span><span class="od-sval">Saif</span></div>
+          <div class="od-srow"><span class="od-splus">+</span><span class="od-slabel">Total calls</span><span class="od-sval">${s.totalCalls??0}</span></div>
+          <div class="od-srow"><span class="od-splus">+</span><span class="od-slabel">Last call</span><span class="od-sval">${timeAgo(s.lastCall)}</span></div>
+          <div class="od-srow"><span class="od-splus">+</span><span class="od-slabel">Streak</span><span class="od-sval">${s.currentStreak??0} days</span></div>`;
+        const wf=document.getElementById('od-waveform'); if(wf) wf.innerHTML=
+          Array.from({length:26},(_,i)=>`<div class="od-wbar" style="height:${6+Math.sin(i*.9)*5}px;animation-delay:${i*.055}s"></div>`).join('');
+        const sid=document.getElementById('od-sid');
+        if(sid) sid.textContent=`25487-10011-${String(s.totalCalls??0).padStart(5,'0')}`;
+      }
+
+      setInterval(()=>{ if(slides[current]?.id==='orion-dash-section') fetchDashData(); }, 5000);
+    </script>
+  </body>
+</html>
