@@ -1,0 +1,122 @@
+{
+  "name": "Saif",
+  "personality": "drill_sergeant",
+  "goals": [
+    "get hired as AI engineer",
+    "post content daily",
+    "finish projects"
+  ],
+  "lastCall": "2026-04-17T05:14:24.658Z",
+  "lastCheckIn": null,
+  "conversationHistory": [
+    {
+      "role": "user",
+      "content": "People are engaging with that. Not going to lie. It's been fine.",
+      "timestamp": "2026-04-16T22:41:12.509Z"
+    },
+    {
+      "role": "assistant",
+      "content": "Okay okay, I see you being coy — but that's actually huge, Saif. People engaging means the content's landing.\n\nSo what else is going on? What do you want to talk about?",
+      "timestamp": "2026-04-16T22:41:13.801Z"
+    },
+    {
+      "role": "user",
+      "content": "I'm working on it, don't scare me like that.",
+      "timestamp": "2026-04-17T00:47:58.474Z"
+    },
+    {
+      "role": "assistant",
+      "content": "Alright, my bad — I'm not trying to scare you, just keep you honest.\n\nWhat's the move then? What do you need right now?",
+      "timestamp": "2026-04-17T00:47:59.621Z"
+    },
+    {
+      "role": "user",
+      "content": "I I I want to I'm I'm I'm I'm I I got done with the project. I'm about to post it.",
+      "timestamp": "2026-04-17T00:48:22.291Z"
+    },
+    {
+      "role": "assistant",
+      "content": "Good. Post it now — don't overthink it.\n\nWhat's next after that?",
+      "timestamp": "2026-04-17T00:48:23.050Z"
+    },
+    {
+      "role": "user",
+      "content": "After this, it's a school.",
+      "timestamp": "2026-04-17T00:48:37.192Z"
+    },
+    {
+      "role": "assistant",
+      "content": "School for what? And when are you starting?",
+      "timestamp": "2026-04-17T00:48:38.157Z"
+    },
+    {
+      "role": "user",
+      "content": "I'm good, how are you?",
+      "timestamp": "2026-04-17T00:51:15.936Z"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm here to push you forward, brother. Not to chat.\n\nYou just said school — what school, when does it start?",
+      "timestamp": "2026-04-17T00:51:16.859Z"
+    },
+    {
+      "role": "user",
+      "content": "I I never said anything about school.",
+      "timestamp": "2026-04-17T00:51:32.839Z"
+    },
+    {
+      "role": "assistant",
+      "content": "You said \"After this, it's a school.\" Two minutes ago.\n\nStop dodging. What did you mean?",
+      "timestamp": "2026-04-17T00:51:33.660Z"
+    },
+    {
+      "role": "user",
+      "content": "Call.",
+      "timestamp": "2026-04-17T05:14:38.194Z"
+    },
+    {
+      "role": "assistant",
+      "content": "I'm listening. Talk.",
+      "timestamp": "2026-04-17T05:14:38.986Z"
+    },
+    {
+      "role": "user",
+      "content": "Yes, so we just made a voice agent, that's kind of like heavy voice. I was thinking about posting it.",
+      "timestamp": "2026-04-17T05:14:52.227Z"
+    },
+    {
+      "role": "assistant",
+      "content": "Good. Post it today.\n\nWhat else did you finish?",
+      "timestamp": "2026-04-17T05:14:53.097Z"
+    },
+    {
+      "role": "user",
+      "content": "You tell me what should I do?",
+      "timestamp": "2026-04-17T05:15:00.357Z"
+    },
+    {
+      "role": "assistant",
+      "content": "No. I ask the questions. You answer them.\n\nWhat did you accomplish today besides the voice agent?",
+      "timestamp": "2026-04-17T05:15:01.490Z"
+    },
+    {
+      "role": "user",
+      "content": "Talk to you.",
+      "timestamp": "2026-04-17T05:15:15.808Z"
+    },
+    {
+      "role": "assistant",
+      "content": "That's not work, Saif.\n\nDid you apply to jobs? Did you code? Did you post content?",
+      "timestamp": "2026-04-17T05:15:16.892Z"
+    }
+  ],
+  "patterns": {
+    "skippedDays": 0,
+    "lastActive": "2026-04-17T05:15:15.810Z",
+    "totalCalls": 28,
+    "longestStreak": 0,
+    "currentStreak": 0
+  },
+  "mood": "neutral",
+  "notes": []
+}
