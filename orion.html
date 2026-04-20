@@ -235,6 +235,11 @@
               </div>
               <div id="od-feedback"></div>
             </div>
+            <div class="od-cmd-section">
+              <div class="od-cmd-label">PROACTIVE AGENT</div>
+              <button class="od-trig-btn" id="od-btn-agent" style="width:100%;padding:12px">🧠 Run Agent Check</button>
+              <div id="od-agent-result"></div>
+            </div>
           </div>
         </div>
         <div class="od-panel">
@@ -254,7 +259,7 @@
 
     <script type="module" src="./assets/index.js"></script>
     <script>
-      const BACKEND = 'https://fredericka-unrepudiative-adolph.ngrok-free.dev';
+      const BACKEND = 'https://orion-c51d.onrender.com';
       let slides = [];
       let current = 0;
       let animating = false;
@@ -428,6 +433,26 @@
         } catch { document.getElementById('od-feedback').innerHTML = '<div class="od-feedback">Connection failed</div>'; }
         btn.disabled = false; btn.textContent = '💬 Text Me Now';
         fetchDashData();
+      });
+
+      document.getElementById('od-btn-agent').addEventListener('click', async e => {
+        e.stopPropagation();
+        const btn = e.currentTarget;
+        btn.disabled = true; btn.textContent = '🧠 Thinking...';
+        const res = document.getElementById('od-agent-result');
+        res.innerHTML = '';
+        try {
+          const r = await fetch(`${BACKEND}/api/agent/check`, { method:'POST', headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'} }).then(r=>r.json());
+          const color = r.should ? (r.method==='call'?'#a78bfa':'#c084fc') : '#4b3a6e';
+          const icon = r.should ? (r.method==='call'?'📞':'💬') : '◌';
+          res.innerHTML = `<div class="od-feedback" style="color:${color};margin-top:10px">
+            ${icon} <strong>${r.should ? (r.method==='call'?'Decided to call':'Decided to text') : 'Decided to wait'}</strong><br>
+            <span style="opacity:0.7;font-size:11px">${r.reason}</span>
+            ${r.topic ? `<br><span style="opacity:0.5;font-size:11px;font-style:italic">"${r.topic}"</span>` : ''}
+          </div>`;
+          if (r.should) setTimeout(fetchDashData, 3000);
+        } catch { res.innerHTML = '<div class="od-feedback">Connection failed</div>'; }
+        btn.disabled = false; btn.textContent = '🧠 Run Agent Check';
       });
 
       /* ── Data ── */
