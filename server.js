@@ -6,6 +6,14 @@ const { generateAudio, cleanOldAudio, AUDIO_DIR } = require('./voice');
 const { addToHistory, loadMemory, updateLastCall, updateLastActive } = require('./memory');
 
 const app = express();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('ngrok-skip-browser-warning', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -206,6 +214,92 @@ app.post('/twiml/status', (req, res) => {
   console.log(`[Server] Call status: ${req.body.CallStatus} — SID: ${req.body.CallSid}`);
   cleanOldAudio();
   res.sendStatus(200);
+});
+
+// Dashboard API endpoints
+app.get('/api/status', (req, res) => {
+  const memory = loadMemory();
+  res.json({
+    name: memory.name,
+    goals: memory.goals,
+    lastCall: memory.lastCall,
+    lastActive: memory.patterns.lastActive,
+    totalCalls: memory.patterns.totalCalls,
+    currentStreak: memory.patterns.currentStreak,
+    mood: memory.mood,
+    notes: memory.notes.slice(-5),
+    decisions: (memory.decisions || []).slice(0, 10),
+  });
+});
+
+app.get('/api/history', (req, res) => {
+  const memory = loadMemory();
+  res.json(memory.conversationHistory.slice(-20));
+});
+
+app.put('/api/goals', (req, res) => {
+  const { goals } = req.body;
+  const memory = loadMemory();
+  const { saveMemory } = require('./memory');
+  memory.goals = goals;
+  saveMemory(memory);
+  res.json({ success: true });
+});
+
+app.post('/api/trigger/call', async (req, res) => {
+  const { topic, to } = req.body;
+  const { makeCall } = require('./caller');
+  try {
+    const memory = loadMemory();
+    const finalScript = await generateCallScript(topic || 'check in');
+    const audioFile = await generateAudio(finalScript, memory.personality);
+    global.pendingScript = finalScript;
+    global.pendingAudio = audioFile || null;
+    const callSid = await makeCall(finalScript, to);
+    res.json({ success: true, callSid });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/trigger/text', async (req, res) => {
+  const { topic } = req.body;
+  const { sendText } = require('./text');
+  try {
+    await sendText(topic || 'check in');
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/agent/check', async (req, res) => {
+  const { shouldCallNow } = require('./brain');
+  const { makeCall } = require('./caller');
+  const { sendText } = require('./text');
+  try {
+    const decision = await shouldCallNow();
+    const { saveMemory } = require('./memory');
+    const memory = loadMemory();
+    if (!memory.decisions) memory.decisions = [];
+    memory.decisions.unshift({ ...decision, action: decision.should ? decision.method : 'none', timestamp: new Date().toISOString() });
+    memory.decisions = memory.decisions.slice(0, 50);
+    saveMemory(memory);
+    if (decision.should && decision.method === 'call') {
+      const finalScript = await require('./brain').generateCallScript(decision.topic);
+      const { generateAudio } = require('./voice');
+      const mem2 = loadMemory();
+      const audioFile = await generateAudio(finalScript, mem2.personality);
+      global.pendingScript = finalScript;
+      global.pendingAudio = audioFile || null;
+      await makeCall(finalScript);
+    } else if (decision.should && decision.method === 'text') {
+      await sendText(decision.topic);
+    }
+    res.json(decision);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 const PORT = process.env.PORT || 3001;
