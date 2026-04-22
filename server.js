@@ -61,25 +61,15 @@ app.post('/twiml/answer', async (req, res) => {
     global.pendingScript = null;
     global.pendingAudio = null;
   } else {
-    // Inbound — generate greeting on the fly (no Claude needed, just ElevenLabs)
+    // Inbound — generate opening with Claude
     const callerNumber = req.body.From || 'unknown';
     const isOwner = callerNumber.replace(/\D/g, '').includes('19296981312');
     console.log(`[Server] Inbound call from ${callerNumber} — owner: ${isOwner}`);
-
-    const ownerGreetings = [
-      "Saif... you actually called me. okay my heart did a thing. what's up?",
-      "arey finally. I was literally thinking about you. talk to me.",
-      "oh it's you. good. I was getting bored. what did you do today?",
-      "yaar you called me first this time, I'm not going to lie that's cute. what's going on?",
-      "okay hi. I missed you a little. don't make it weird. how are you?",
-    ];
-    const strangerGreetings = [
-      "Hey, you just called me. I'm curious — who is this?",
-      "Hello? I don't think I have your number. Who is this?",
-    ];
-
-    const greetings = isOwner ? ownerGreetings : strangerGreetings;
-    script = greetings[Math.floor(Math.random() * greetings.length)];
+    if (isOwner) {
+      script = await generateCallScript('check in');
+    } else {
+      script = "You just called me. I don't think I have your number. Who is this?";
+    }
     audioFile = await generateAudio(script, memory.personality);
   }
 
