@@ -306,6 +306,46 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`[Server] AI Companion server running on port ${PORT}`);
   console.log(`[Server] Set SERVER_URL in .env to your ngrok URL`);
+  startAgent();
 });
+
+function startAgent() {
+  const cron = require('node-cron');
+  const { shouldCallNow, generateCallScript } = require('./brain');
+  const { sendText } = require('./text');
+  const { makeCall } = require('./caller');
+
+  async function checkAndReach() {
+    console.log(`\n[Agent] ${new Date().toLocaleTimeString()} — checking...`);
+    try {
+      const decision = await shouldCallNow();
+      console.log(`[Agent] Decision:`, decision);
+      const { saveMemory } = require('./memory');
+      const memory = loadMemory();
+      if (!memory.decisions) memory.decisions = [];
+      memory.decisions.unshift({ ...decision, action: decision.should ? decision.method : 'none', timestamp: new Date().toISOString() });
+      memory.decisions = memory.decisions.slice(0, 50);
+      saveMemory(memory);
+      if (!decision.should) { console.log(`[Agent] Not reaching out — ${decision.reason}`); return; }
+      if (decision.method === 'text') {
+        await sendText(decision.topic);
+      } else {
+        const finalScript = await generateCallScript(decision.topic);
+        const audioFile = await generateAudio(finalScript, memory.personality);
+        global.pendingScript = finalScript;
+        global.pendingAudio = audioFile || null;
+        await makeCall(finalScript);
+      }
+    } catch (err) { console.error('[Agent] Error:', err.message); }
+  }
+
+  cron.schedule('*/20 * * * *', () => {
+    const jitter = Math.floor(Math.random() * 5 * 60 * 1000);
+    setTimeout(checkAndReach, jitter);
+  });
+
+  setTimeout(checkAndReach, 30000);
+  console.log('[Agent] Autonomous agent running inside server...');
+}
 
 module.exports = app;
