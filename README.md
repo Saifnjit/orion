@@ -28,7 +28,7 @@ Every 20 minutes:
 | Voice | ElevenLabs — real-time TTS with custom voice |
 | Telephony | Twilio — outbound calls, inbound calls, SMS/WhatsApp |
 | Backend | Node.js + Express — deployed on Render |
-| Frontend | React landing page + custom dashboard — deployed on GitHub Pages |
+| Frontend | Vanilla JS dashboard — deployed on GitHub Pages |
 | Autonomy | node-cron — agent loop runs every 20 minutes |
 
 ## Features
@@ -55,7 +55,7 @@ It rotates through topics naturally, pushes back when you're vague, and referenc
 ## Stack
 
 ```
-Frontend:  React (Vite) + vanilla JS dashboard — GitHub Pages
+Frontend:  Vanilla JS + HTML — GitHub Pages
 Backend:   Express.js — Render
 AI:        @anthropic-ai/sdk (Claude Haiku + Sonnet)
 Voice:     ElevenLabs REST API
@@ -85,8 +85,7 @@ SERVER_URL=https://your-backend-url.com
 ```
 
 ```bash
-node server.js   # Start backend
-node agent.js    # Start autonomous agent loop
+node server.js   # Start backend (autonomous agent loop runs inside)
 ```
 
 ## API Endpoints
