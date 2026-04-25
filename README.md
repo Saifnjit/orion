@@ -1,24 +1,59 @@
 # Orion — Autonomous AI Companion
 
-> An AI agent that thinks, decides, and reaches out — just like a human would.
+> It doesn't wait to be asked. It calls you.
 
-Orion is a fully autonomous AI companion that proactively calls and texts you based on context, time of day, and your goals. It doesn't wait to be prompted — it decides when to reach out, what to say, and how to follow up.
+Orion is an AI agent that proactively reaches out — by phone call or text — based on your goals, your history, and the current moment. No prompts, no buttons. It runs a continuous decision loop, checks context, and acts on its own.
 
-## Demo
+**Live demo:** [saifnjit.github.io/orion/orion.html](https://saifnjit.github.io/orion/orion.html)
 
-**Live:** [saifnjit.github.io/orion/orion.html](https://saifnjit.github.io/orion/orion.html)
+---
 
-## How It Works
+## Proactive Decision Engine
+
+Every 20 minutes, Orion runs an autonomous loop:
 
 ```
-Every 20 minutes:
-  Claude analyzes → time, last contact, goals, conversation history
-  Decides → call / text / wait
-  Acts → Twilio dials your number or sends WhatsApp
-  Speaks → ElevenLabs TTS with a custom voice
-  Listens → Twilio STT → Claude responds in real time
-  Remembers → conversation stored in persistent memory
+Claude reads → full conversation history, goals, last contact time, time of day
+Claude decides → call / text / wait  (with a reason logged for every decision)
+Claude acts → Twilio dials your number or sends a WhatsApp message
 ```
+
+It doesn't just fire on a schedule. It weighs context:
+- Has too much time passed since last contact?
+- Did you mention something yesterday that needs a follow-up?
+- Is it an appropriate hour to call?
+- What topic is most relevant right now?
+
+Every decision — including "wait" — is logged in the Mind tab of the dashboard with the exact reasoning Claude used.
+
+---
+
+## Persistent Memory
+
+Orion remembers across every call and text. The memory store holds:
+
+- Full conversation history with timestamps
+- Your stated goals (job search, gym, diet, content, projects)
+- Mood and engagement patterns
+- Call streaks and activity tracking
+
+When Orion calls you, it already knows what you said three days ago. It references prior conversations naturally — "you mentioned your diet went sideways, did you fix that?" — without being asked. Memory persists across server restarts.
+
+---
+
+## How a Call Works
+
+```
+1. Orion decides to call (autonomous, no trigger needed)
+2. Generates a context-aware opening script via Claude
+3. Converts to voice via ElevenLabs (custom Kratos-style voice)
+4. Twilio dials your number
+5. You speak — Twilio STT transcribes in real time
+6. Claude responds using full memory context
+7. Conversation saved to memory for future reference
+```
+
+---
 
 ## Architecture
 
@@ -29,41 +64,36 @@ Every 20 minutes:
 | Telephony | Twilio — outbound calls, inbound calls, SMS/WhatsApp |
 | Backend | Node.js + Express — deployed on Render |
 | Frontend | Vanilla JS dashboard — deployed on GitHub Pages |
-| Autonomy | node-cron — agent loop runs every 20 minutes |
+| Autonomy | node-cron — agent loop runs every 20 minutes inside server |
 
-## Features
+---
 
-- **Proactive calling** — Orion decides when to call based on your schedule and goals
-- **Real-time voice conversation** — full back-and-forth dialogue on a phone call
-- **Persistent memory** — remembers what you said yesterday, last week
-- **Autonomous decision loop** — Claude evaluates context and chooses call / text / wait
-- **Live dashboard** — Mind tab shows every decision Orion makes in real time
-- **Inbound + outbound** — works both ways, call Orion or let it call you
-- **SMS + WhatsApp** — text-based check-ins when a call isn't appropriate
+## Dashboard
 
-## Conversation Intelligence
+The live dashboard exposes Orion's full internal state:
 
-Orion tracks multiple areas of your life across calls:
-- Job applications and interview progress
-- Gym and fitness consistency  
-- Diet and nutrition
-- Content creation and posting
-- Project completion
+- **Stats** — total calls, current streak, last active
+- **Goals** — editable in real time
+- **Mind** — every autonomous decision with timestamp and reasoning
+- **History** — full conversation log across all calls and texts
+- **Controls** — manually trigger a call or text, run an agent check
 
-It rotates through topics naturally, pushes back when you're vague, and references previous conversations.
+---
 
 ## Stack
 
 ```
-Frontend:  Vanilla JS + HTML — GitHub Pages
 Backend:   Express.js — Render
 AI:        @anthropic-ai/sdk (Claude Haiku + Sonnet)
 Voice:     ElevenLabs REST API
 Calls:     Twilio Voice + TwiML
 Messaging: Twilio SMS + WhatsApp
 Scheduler: node-cron
-Memory:    JSON-based persistent store
+Memory:    JSON persistent store
+Frontend:  Vanilla JS + HTML — GitHub Pages
 ```
+
+---
 
 ## Local Setup
 
@@ -73,7 +103,8 @@ cd orion
 npm install
 ```
 
-Create a `.env` file:
+Copy `.env.example` to `.env` and fill in your keys:
+
 ```
 ANTHROPIC_API_KEY=
 ELEVENLABS_API_KEY=
@@ -85,22 +116,24 @@ SERVER_URL=https://your-backend-url.com
 ```
 
 ```bash
-node server.js   # Start backend (autonomous agent loop runs inside)
+node server.js   # starts server + autonomous agent loop
 ```
 
-## API Endpoints
+---
+
+## API
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/status` | Memory, goals, call history |
-| GET | `/api/history` | Conversation history |
-| POST | `/api/trigger/call` | Trigger a call with optional topic |
-| POST | `/api/trigger/text` | Trigger a text with optional topic |
+| GET | `/api/status` | Memory, goals, streaks, recent decisions |
+| GET | `/api/history` | Full conversation history |
+| POST | `/api/trigger/call` | Manually trigger a call |
+| POST | `/api/trigger/text` | Manually trigger a text |
 | POST | `/api/agent/check` | Run one cycle of the autonomous decision loop |
-| POST | `/twiml/answer` | Twilio webhook — handles inbound/outbound calls |
-| POST | `/twiml/respond` | Twilio webhook — handles speech responses |
-| POST | `/sms/inbound` | Twilio webhook — handles inbound SMS/WhatsApp |
+| POST | `/twiml/answer` | Twilio webhook — inbound/outbound call handler |
+| POST | `/twiml/respond` | Twilio webhook — real-time speech response |
+| POST | `/sms/inbound` | Twilio webhook — inbound SMS/WhatsApp |
 
-## Built By
+---
 
-Saif — AI Engineer
+Built by Saif — AI Engineer
