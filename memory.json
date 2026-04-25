@@ -6,117 +6,257 @@
     "post content daily",
     "finish projects"
   ],
-  "lastCall": "2026-04-17T05:14:24.658Z",
+  "lastCall": "2026-04-22T19:02:55.813Z",
   "lastCheckIn": null,
   "conversationHistory": [
     {
       "role": "user",
-      "content": "People are engaging with that. Not going to lie. It's been fine.",
-      "timestamp": "2026-04-16T22:41:12.509Z"
+      "content": "I worked and I've been, I was doing a lot of things right now, I just got done with my project. I am going to upload the demo right now as well as I was about to hit the gym. Also, my diet went a bit sideways, so I'm trying to fix that.",
+      "timestamp": "2026-04-22T02:57:30.732Z"
     },
     {
       "role": "assistant",
-      "content": "Okay okay, I see you being coy — but that's actually huge, Saif. People engaging means the content's landing.\n\nSo what else is going on? What do you want to talk about?",
-      "timestamp": "2026-04-16T22:41:13.801Z"
+      "content": "Demo uploading now — that's the move. Gym right after, lock that in.\n\nDiet sideways how? What happened there?",
+      "timestamp": "2026-04-22T02:57:32.084Z"
     },
     {
       "role": "user",
-      "content": "I'm working on it, don't scare me like that.",
-      "timestamp": "2026-04-17T00:47:58.474Z"
+      "content": "I ended up I ended up eating a pizza, eating a pizza.",
+      "timestamp": "2026-04-22T02:57:47.759Z"
     },
     {
       "role": "assistant",
-      "content": "Alright, my bad — I'm not trying to scare you, just keep you honest.\n\nWhat's the move then? What do you need right now?",
-      "timestamp": "2026-04-17T00:47:59.621Z"
+      "content": "Pizza happens. One meal doesn't kill it.\n\nWhat's the plan to lock diet back down starting tomorrow — are you meal prepping or just being more intentional with choices?",
+      "timestamp": "2026-04-22T02:57:48.921Z"
     },
     {
       "role": "user",
-      "content": "I I I want to I'm I'm I'm I'm I I got done with the project. I'm about to post it.",
-      "timestamp": "2026-04-17T00:48:22.291Z"
+      "content": "Hey, I was just working on a project right now.",
+      "timestamp": "2026-04-22T18:56:18.855Z"
     },
     {
       "role": "assistant",
-      "content": "Good. Post it now — don't overthink it.\n\nWhat's next after that?",
-      "timestamp": "2026-04-17T00:48:23.050Z"
+      "content": "I hear you. Finish the project first, then we talk diet after the gym.\n\nBut real quick — you posting the demo today or waiting?",
+      "timestamp": "2026-04-22T18:56:19.991Z"
     },
     {
       "role": "user",
-      "content": "After this, it's a school.",
-      "timestamp": "2026-04-17T00:48:37.192Z"
+      "content": "No, 100% Going to pose the demo today. Yeah, I am going to post it.",
+      "timestamp": "2026-04-22T18:56:39.680Z"
     },
     {
       "role": "assistant",
-      "content": "School for what? And when are you starting?",
-      "timestamp": "2026-04-17T00:48:38.157Z"
+      "content": "Good. That's the content win right there.\n\nGo crush the gym, post when you're back. We're solid. You got this.",
+      "timestamp": "2026-04-22T18:56:41.078Z"
     },
     {
       "role": "user",
-      "content": "I'm good, how are you?",
-      "timestamp": "2026-04-17T00:51:15.936Z"
+      "content": "So what do you think I should do today?",
+      "timestamp": "2026-04-22T18:56:57.126Z"
     },
     {
       "role": "assistant",
-      "content": "I'm here to push you forward, brother. Not to chat.\n\nYou just said school — what school, when does it start?",
-      "timestamp": "2026-04-17T00:51:16.859Z"
+      "content": "You already laid it out, bro. Finish the project, post the demo, hit the gym.\n\nThat's the day. Execute that and you're winning.",
+      "timestamp": "2026-04-22T18:56:58.294Z"
     },
     {
       "role": "user",
-      "content": "I I never said anything about school.",
-      "timestamp": "2026-04-17T00:51:32.839Z"
+      "content": "Could you like call me later on to see if I am on you know track or I have gone sideways? Could you do that?",
+      "timestamp": "2026-04-22T18:57:19.271Z"
     },
     {
       "role": "assistant",
-      "content": "You said \"After this, it's a school.\" Two minutes ago.\n\nStop dodging. What did you mean?",
-      "timestamp": "2026-04-17T00:51:33.660Z"
+      "content": "Alright. Keep grinding. I'll check back in later.",
+      "timestamp": "2026-04-22T18:57:19.275Z"
     },
     {
       "role": "user",
-      "content": "Call.",
-      "timestamp": "2026-04-17T05:14:38.194Z"
+      "content": "Hey, what's going on Ryan? I just got back from Jim. I was working on my project right now. We're doing solid.",
+      "timestamp": "2026-04-22T19:03:09.993Z"
     },
     {
       "role": "assistant",
-      "content": "I'm listening. Talk.",
-      "timestamp": "2026-04-17T05:14:38.986Z"
+      "content": "Good work. How many sets and what weight you hitting today?",
+      "timestamp": "2026-04-22T19:03:10.889Z"
     },
     {
       "role": "user",
-      "content": "Yes, so we just made a voice agent, that's kind of like heavy voice. I was thinking about posting it.",
-      "timestamp": "2026-04-17T05:14:52.227Z"
+      "content": "Oh, I bet a lot of chest in about 4 set an an exercise I guess.",
+      "timestamp": "2026-04-22T19:03:22.385Z"
     },
     {
       "role": "assistant",
-      "content": "Good. Post it today.\n\nWhat else did you finish?",
-      "timestamp": "2026-04-17T05:14:53.097Z"
+      "content": "Solid. That's the volume.\n\nDid you eat before or after? Need to make sure you're fueling right if you're pushing that hard.",
+      "timestamp": "2026-04-22T19:03:23.723Z"
     },
     {
       "role": "user",
-      "content": "You tell me what should I do?",
-      "timestamp": "2026-04-17T05:15:00.357Z"
+      "content": "Exactly. So I did eat a watermelon before I went to the gym.",
+      "timestamp": "2026-04-22T19:03:39.060Z"
     },
     {
       "role": "assistant",
-      "content": "No. I ask the questions. You answer them.\n\nWhat did you accomplish today besides the voice agent?",
-      "timestamp": "2026-04-17T05:15:01.490Z"
+      "content": "Watermelon's good for hydration but that's not real fuel, bro. You need protein and carbs before chest day — something that actually sticks with you.\n\nHow's the project coming along? You said you were working on it before the gym.",
+      "timestamp": "2026-04-22T19:03:40.408Z"
     },
     {
       "role": "user",
-      "content": "Talk to you.",
-      "timestamp": "2026-04-17T05:15:15.808Z"
+      "content": "Yeah, I'm done with the project. I I'm actually just recording s***.",
+      "timestamp": "2026-04-22T19:04:05.212Z"
     },
     {
       "role": "assistant",
-      "content": "That's not work, Saif.\n\nDid you apply to jobs? Did you code? Did you post content?",
-      "timestamp": "2026-04-17T05:15:16.892Z"
+      "content": "Done? Hold up — what project are we talking about? The AI one or something else?",
+      "timestamp": "2026-04-22T19:04:06.019Z"
     }
   ],
   "patterns": {
     "skippedDays": 0,
-    "lastActive": "2026-04-17T05:15:15.810Z",
-    "totalCalls": 28,
-    "longestStreak": 0,
-    "currentStreak": 0
+    "lastActive": "2026-04-22T19:04:05.214Z",
+    "totalCalls": 43,
+    "longestStreak": 7,
+    "currentStreak": 7
   },
   "mood": "neutral",
-  "notes": []
+  "notes": [],
+  "decisions": [
+    {
+      "action": "call",
+      "should": true,
+      "method": "call",
+      "reason": "Saif hasn't been active in 4 hours — peak accountability window, checking on project progress",
+      "topic": "project demo and job applications",
+      "timestamp": "2026-04-22T21:00:00.000Z"
+    },
+    {
+      "action": "text",
+      "should": true,
+      "method": "text",
+      "reason": "Evening check-in — wants to know if content got posted today",
+      "topic": "content posting",
+      "timestamp": "2026-04-22T17:30:00.000Z"
+    },
+    {
+      "action": "call",
+      "should": true,
+      "method": "call",
+      "reason": "Morning accountability — no gym logged yet, needs a push",
+      "topic": "gym and diet",
+      "timestamp": "2026-04-22T10:15:00.000Z"
+    },
+    {
+      "action": "none",
+      "reason": "sleeping hours",
+      "topic": null,
+      "timestamp": "2026-04-18T08:23:16.507Z"
+    },
+    {
+      "action": "none",
+      "reason": "sleeping hours",
+      "topic": null,
+      "timestamp": "2026-04-18T06:49:44.173Z"
+    },
+    {
+      "action": "none",
+      "reason": "sleeping hours",
+      "topic": null,
+      "timestamp": "2026-04-18T06:20:05.304Z"
+    },
+    {
+      "action": "none",
+      "reason": "sleeping hours",
+      "topic": null,
+      "timestamp": "2026-04-18T06:05:18.189Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-18T05:52:58.812Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-18T05:20:08.490Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-18T05:01:34.329Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-18T04:44:16.596Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-18T04:24:46.063Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-18T02:07:11.326Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-18T00:02:55.600Z"
+    },
+    {
+      "action": "none",
+      "reason": "parse error",
+      "topic": null,
+      "timestamp": "2026-04-17T23:41:21.770Z"
+    },
+    {
+      "action": "none",
+      "reason": "too recent",
+      "topic": null,
+      "timestamp": "2026-04-17T22:01:44.526Z"
+    },
+    {
+      "action": "none",
+      "reason": "too recent",
+      "topic": null,
+      "timestamp": "2026-04-17T20:06:04.852Z"
+    },
+    {
+      "action": "none",
+      "reason": "too recent",
+      "topic": null,
+      "timestamp": "2026-04-17T19:43:53.224Z"
+    },
+    {
+      "action": "none",
+      "reason": "too recent",
+      "topic": null,
+      "timestamp": "2026-04-17T18:44:15.865Z"
+    },
+    {
+      "action": "none",
+      "reason": "sleeping hours",
+      "topic": null,
+      "timestamp": "2026-04-17T06:29:49.363Z"
+    },
+    {
+      "action": "none",
+      "reason": "sleeping hours",
+      "topic": null,
+      "timestamp": "2026-04-17T06:08:05.008Z"
+    },
+    {
+      "action": "none",
+      "reason": "too recent",
+      "topic": null,
+      "timestamp": "2026-04-17T05:52:30.819Z"
+    }
+  ]
 }
