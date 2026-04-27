@@ -1,5 +1,13 @@
 # Orion — Autonomous AI Companion
 
+## Real-World Results
+- 43 autonomous calls completed
+- 7-day streak maintained
+- Zero human prompting required
+- Persistent memory across all conversations
+- Every decision logged with full reasoning
+
+
 > It doesn't wait to be asked. It calls you.
 
 Orion is an AI agent that proactively reaches out — by phone call or text — based on your goals, your history, and the current moment. No prompts, no buttons. It runs a continuous decision loop, checks context, and acts on its own.
